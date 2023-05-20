@@ -15,7 +15,7 @@
 		},
 		{
 			"label": "Build",
-			"command": "g++ --std=c++17 -fsanitize=thread main.cpp",
+			"command": "g++ --std=c++17 -fsanitize=thread main.cpp -lspdlog -lfmt",
 			"type": "shell",
 			"args": [],
 			"problemMatcher": [

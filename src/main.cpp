@@ -9,6 +9,7 @@
 #include <ctime>
 #include <iostream>
 #include <random>
+#include <spdlog/spdlog.h>
 
 using namespace std;
 
@@ -46,67 +47,50 @@ void watch(int i)
 {
   Random random;
   auto x = random(1, 9);
-  // cout << "watch# " << i << " launched, now going to sleep for" << x << endl;
+  SPDLOG_INFO("watch# {} launched, now going to sleep for {}", i, x);
   std::this_thread::sleep_for(std::chrono::milliseconds(x));
   {
     std::lock_guard<std::mutex> lk(cv_m);
     q.push(i);
   }
-  // // cout << "notifying" << endl;
+  SPDLOG_INFO("notifying");
   cv.notify_one();
   // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-  // cout << i << endl;
-  // std::// cout << "watch thread ending " << i << std::endl;
+  SPDLOG_INFO(i);
+  // std::SPDLOG_INFO("watch thread ending " << i << std::endl;
 }
 
 void reaper()
 {
-  // cout << "reaper thread started" << endl;
+  SPDLOG_INFO("reaper thread started");
   int count = 10;
   while (count--)
   {
     {
       std::unique_lock<std::mutex> lk(cv_m);
-      // cout << "waiting for condition, count=" << count << endl;
+      SPDLOG_INFO("waiting for condition, count={}", count);
       cv.wait(lk, []
               { return !q.empty(); });
-      // cout << q.front() << endl;
+      SPDLOG_INFO(q.front());
       {
         std::lock_guard<std::mutex> lk(cv_w);
         watches[q.front()].join();
         q.pop();
       }
     }
-    // {
-    //   std::unique_lock<std::mutex> lk(cv_m);
-    //   // cout << "reaper trying to join watch thread# " << idx << endl;
-    //   if (watches[idx].joinable())
-    //     watches[idx].join();
-    //   // cout << "reaper successfully joined watch thread# " << idx << endl;
-    // }
   }
-  // cout << "reaper thread ending" << endl;
+  SPDLOG_INFO("reaper thread ending");
 }
 
 int main()
 {
-  thread r(reaper);
+  thread reaper_thread(reaper);
   for (int i = 0; i < 10; i++)
   {
     std::lock_guard<std::mutex> lk(cv_w);
     watches.push_back(thread(watch, i));
   }
-  // for (int i = 0; i < 10; i++)
-  // {
-  // 	if (watches[i].joinable())
-  // 	{
-  // 		watches[i].join();
-  // 	}
-  // }
-  // // cout << "main thread going to sleep";
-  // std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-  // // cout << "main thread woke up";
-  if (r.joinable())
-    r.join();
+  if (reaper_thread.joinable())
+    reaper_thread.join();
   return 0;
 }
