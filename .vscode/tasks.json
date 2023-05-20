@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Rerun",
+			"command": "while true; do ./a.out; done",
+			"type": "shell",
+			"args": [],
+			"problemMatcher": [
+				"$tsc"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+		},
+		{
+			"label": "Build",
+			"command": "g++ --std=c++17 -fsanitize=thread main.cpp",
+			"type": "shell",
+			"args": [],
+			"problemMatcher": [
+				"$tsc"
+			],
+			"presentation": {
+				"reveal": "always"
+			},
+			"group": "build"
+		}
+	]
+}
