@@ -17,7 +17,7 @@ include(cmake/variables.cmake)
 
 add_library(
     threads_lib OBJECT
-    source/main.cpp
+    source/lib.cpp
 )
 
 target_include_directories(
@@ -60,7 +60,7 @@ if(NOT threads_DEVELOPER_MODE)
 elseif(NOT PROJECT_IS_TOP_LEVEL)
   message(
       AUTHOR_WARNING
-      "Developer mode is intended for developers of threads"
+      "Developer mode is intended for developers of cmake"
   )
 endif()
 

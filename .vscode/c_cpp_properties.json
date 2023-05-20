@@ -4,6 +4,7 @@
             "name": "macos-clang-x64",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/source/**",
                 "${workspaceFolder}/build/vcpkg_installed/x64-osx/include/**",
                 "/Users/rakeshsehgal/Workspace/raakasf/threads/build/vcpkg_installed/x64-osx/include/**",
                 "/Users/rakeshsehgal/Workspace/raakasf/threads/build/vcpkg_installed/x64-osx/include/spdlog/**"

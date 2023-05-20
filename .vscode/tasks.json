@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"label": "Rerun",
-			"command": "while true; do ./a.out; done",
+			"command": "while true; do ./build/threads; done",
 			"type": "shell",
 			"args": [],
 			"problemMatcher": [
