@@ -4,9 +4,9 @@
             "name": "macos-clang-x64",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/local/include/spdlog/**",
-                "/usr/local/Cellar/spdlog/1.11.0/include",
-                "/usr/local/Cellar/fmt/9.1.0/include/**"
+                "${workspaceFolder}/build/vcpkg_installed/x64-osx/include/**",
+                "/Users/rakeshsehgal/Workspace/raakasf/threads/build/vcpkg_installed/x64-osx/include/**",
+                "/Users/rakeshsehgal/Workspace/raakasf/threads/build/vcpkg_installed/x64-osx/include/spdlog/**"
             ],
             "compilerPath": "/usr/local/opt/llvm/bin/clang",
             "cStandard": "${default}",

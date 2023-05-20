@@ -99,6 +99,7 @@
     "optional": "cpp",
     "streambuf": "cpp",
     "queue": "cpp",
-    "deque": "cpp"
+    "deque": "cpp",
+    "list": "cpp"
   }
 }

@@ -17,19 +17,24 @@ include(cmake/variables.cmake)
 
 add_library(
     threads_lib OBJECT
-    source/lib.cpp
+    source/main.cpp
 )
 
 target_include_directories(
     threads_lib ${warning_guard}
     PUBLIC
+    include_directories(build/vcpkg_installed/x64-osx/include)
+    include_directories(build/vcpkg_installed/x64-osx/lib)
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
 )
 
 target_compile_features(threads_lib PUBLIC cxx_std_17)
 
 find_package(fmt REQUIRED)
+find_package(spdlog REQUIRED)
+
 target_link_libraries(threads_lib PRIVATE fmt::fmt)
+target_link_libraries(threads_lib PRIVATE spdlog::spdlog)
 
 # ---- Declare executable ----
 

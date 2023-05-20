@@ -5,6 +5,10 @@
     {
       "name": "fmt",
       "version>=": "9.1.0#1"
+    },
+    {
+      "name": "spdlog",
+      "version>=": "1.8.5#1"
     }
   ],
   "default-features": [],
