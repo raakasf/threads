@@ -45,7 +45,7 @@ set_property(TARGET threads_exe PROPERTY OUTPUT_NAME threads)
 
 target_compile_features(threads_exe PRIVATE cxx_std_17)
 
-target_link_libraries(threads_exe PRIVATE threads_lib)
+target_link_libraries(threads_exe PRIVATE threads_lib -fsanitize=address)
 
 # ---- Install rules ----
 
