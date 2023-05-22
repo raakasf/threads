@@ -1,6 +1,7 @@
 #include "lib.hpp"
 
 #include <fmt/core.h>
+#include <google/protobuf/port.h>
 
 library::library()
     : name{fmt::format("{}", "cmake")}

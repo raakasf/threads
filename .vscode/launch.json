@@ -7,7 +7,7 @@
       "request": "launch",
       "args": [],
       "cwd": "/Users/rakeshsehgal/Workspace/raakasf/threads",
-      "program": "/Users/rakeshsehgal/Workspace/raakasf/threads/build/Debug/outDebug"
+      "program": "/Users/rakeshsehgal/Workspace/raakasf/threads/build/sanitize/threads"
     }
   ]
 }

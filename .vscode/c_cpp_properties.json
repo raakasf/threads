@@ -6,8 +6,7 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/source/**",
                 "${workspaceFolder}/build/sanitize/vcpkg_installed/x64-osx/include/**",
-                "/Users/rakeshsehgal/Workspace/raakasf/threads/build/sanitize/vcpkg_installed/x64-osx/include/**",
-                "/Users/rakeshsehgal/Workspace/raakasf/threads/build/sanitize/vcpkg_installed/x64-osx/include/spdlog/**"
+                "${workspaceFolder}/build/sanitize/vcpkg_installed/x64-osx/include/google/**"
             ],
             "compilerPath": "/usr/local/opt/llvm/bin/clang",
             "cStandard": "${default}",
@@ -16,7 +15,13 @@
             "compilerArgs": [
                 ""
             ],
-            "configurationProvider": "ms-vscode.makefile-tools"
+            "configurationProvider": "ms-vscode.makefile-tools",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/build/sanitize/vcpkg_installed/x64-osx/include/**",
+                    "${workspaceFolder}/build/sanitize/vcpkg_installed/x64-osx/include/google/**"
+                ]
+            }
         }
     ],
     "version": 4
