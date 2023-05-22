@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.14)
 
 include(cmake/prelude.cmake)
 
+set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
+
 project(
     threads
     VERSION 0.1.0
@@ -23,8 +25,8 @@ add_library(
 target_include_directories(
     threads_lib ${warning_guard}
     PUBLIC
-    include_directories(build/vcpkg_installed/x64-osx/include)
-    include_directories(build/vcpkg_installed/x64-osx/lib)
+    include_directories(build/sanitize/vcpkg_installed/x64-osx/include)
+    include_directories(build/sanitize/vcpkg_installed/x64-osx/lib)
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
 )
 
@@ -45,7 +47,7 @@ set_property(TARGET threads_exe PROPERTY OUTPUT_NAME threads)
 
 target_compile_features(threads_exe PRIVATE cxx_std_17)
 
-target_link_libraries(threads_exe PRIVATE threads_lib -fsanitize=address)
+target_link_libraries(threads_exe PRIVATE threads_lib)
 
 # ---- Install rules ----
 
