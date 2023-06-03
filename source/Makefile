@@ -6,18 +6,16 @@ SRC_DIRS ?= ./source
 SRCS := $(shell find $(SRC_DIRS) -name *.cpp -or -name *.c -or -name *.s)
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
-VCPKG_INC_DIR ?= ./build/sanitize/vcpkg_installed/x64-osx/
+VCPKG_INC_DIR ?= ./build/sanitize/vcpkg_installed/x64-osx/include
+vcpkg_installed := $(shell find $(VCPKG_INC_DIR) -name *.h)
 
-INC_DIRS := $(shell find $(VCPKG_INC_DIR) or $(SRC_DIRS) -type d)
-INC_FLAGS := $(addprefix -I./, $(INC_DIRS))
+INC_DIRS := $(shell find $(vcpkg_installed) -type d)
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-CPPFLAGS ?= $(INC_FLAGS) #-MMD -MP
+CPPFLAGS ?= $(INC_FLAGS) -MMD -MP
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)
-
-# $(info    INC_DIRS is $(INC_DIRS))
-$(info    INC_FLAGS is $(INC_FLAGS))
 
 # assembly
 $(BUILD_DIR)/%.s.o: %.s
@@ -33,7 +31,6 @@ $(BUILD_DIR)/%.c.o: %.c
 $(BUILD_DIR)/%.cpp.o: %.cpp
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
-	@echo "var is $(CPPFLAGS)"
 
 
 .PHONY: clean
